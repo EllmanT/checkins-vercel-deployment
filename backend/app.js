@@ -29,7 +29,9 @@ const socketIO = require("socket.io");
 const socketServer = http.createServer(app);
 const io = socketIO(socketServer, {
   cors: {
-    origin: "http://localhost:3000", // Replace with the origin of your frontend application
+   // origin: "http://localhost:3000", // Replace with the origin of your frontend application
+    origin: "checkins-vercel-deployment-frontend.vercel.app", // URL for the frontend of the application
+    
     methods: ["GET", "POST"], // Specify the allowed HTTP methods
     allowedHeaders: ["my-custom-header"], // Specify any custom headers you want to allow
     credentials: true, // Set to true if you want to allow sending cookies with the request
@@ -55,8 +57,8 @@ io.on("connection", (socket) => {
   });
 });
 
-socketServer.listen(3005, () => {
-  console.log("Socket.IO server listening on port 3005");
+socketServer.listen(process.env.SOCKETIO_PORT, () => {
+  console.log(`Socket.IO server listening on port ${process.env.SOCKETIO_PORT}`);
 });
 
 //dealing with the automatic listenning of events end
