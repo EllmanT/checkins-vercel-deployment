@@ -57,8 +57,10 @@ io.on("connection", (socket) => {
   });
 });
 
-socketServer.listen(process.env.SOCKETIO_PORT, () => {
-  console.log(`Socket.IO server listening on port ${process.env.SOCKETIO_PORT}`);
+//the socket io port url
+const socket_Port= `checkins-vercel-deployment-api.vercel.app/${process.env.socketIO_PORT}`
+socketServer.listen(socket_Port, () => {
+  console.log(`Socket.IO server listening on port ${socket_Port}`);
 });
 
 //dealing with the automatic listenning of events end
