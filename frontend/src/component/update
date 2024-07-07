@@ -1,0 +1,28 @@
+    dispatch(
+              updateVisit(
+                visitId,
+                tradeCompanyId,
+                email,
+                phoneNumber,
+                regNumber,
+                timeIn,
+                timeOut,
+                ticketNumber,
+                reasonForVisit,
+                status,
+                companyId,
+                contactDetailsId
+              )
+            ).then(() => {
+              toast.success("Visit updated successfully");
+
+              socketId.emit("update-visits");
+              socketId.on("update-completed", () => {
+                dispatch(
+                  getAllVisitsPage(page, pageSize, JSON.stringify(sort), search)
+                );
+                dispatch({ type: "clearMessages" });
+                handleClose();
+                setDisable(true);
+              });
+            });
